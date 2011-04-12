@@ -1,0 +1,8 @@
+<?php
+
+$string['finalreport'] = 'finalreport';
+
+$string['modulenameplural'] = 'finalreports';
+$string['modulename'] = 'finalreport';
+
+?>

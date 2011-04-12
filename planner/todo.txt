@@ -1,0 +1,16 @@
+TODO's
+
+0. [ ] Lock down teachers: should not be able to call student specific urls.
+1. [ ] Include proper support for groups
+2. [X] Add backup methods
+3. [ ] Scale down legend (no more than 3 colors): leave out 'graded' criterion (this is visible in another column anyway)
+4. [ ] Include proper navigation buttons (esp. back button)
+5. [ ] Attach capabilities to teachers and students. Do not make a distinction between those types of users in the code 
+       itself (cf. assignment/db/acces.php).
+
+
+Students:
+- submit planning
+
+Teachers:
+- unlock planning

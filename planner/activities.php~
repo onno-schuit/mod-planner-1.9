@@ -1,0 +1,43 @@
+<?php  // $Id: view.php,v 1.4 2006/08/28 16:41:20 mark-nielsen Exp $
+/**
+ * This page prints a particular instance of planner
+ * 
+ * @author 
+ * @version $Id: view.php,v 1.4 2006/08/28 16:41:20 mark-nielsen Exp $
+ * @package planner
+ **/
+
+
+    require_once("../../config.php");
+    require_once("lib.php");
+   
+    
+    $id = required_param('id', PARAM_INT);                 // Course Module ID
+    $coursesectionid = required_param('coursesectionid', PARAM_INT);                 // CourseSection ID
+    planner_set_variables('planner');
+    require_course_login($course, false, $cm);
+
+    if (!$planner = planner_get_planner($cm->instance)) {
+        error("Course module is incorrect");
+    }
+    
+    $strplanner = get_string('modulename', 'planner');
+    $strplanners = get_string('modulenameplural', 'planner');
+
+    $navigation = build_navigation('', $cm);
+    print_header_simple(format_string($planner->name), "", $navigation, "", "", true,
+                  update_module_button($cm->id, $course->id, $strplanner), navmenu($course, $cm));
+    
+    
+                 
+?>
+  <style>
+    <?php require_once("css/forms.css"); ?>
+  </style>
+  <script type="text/javascript">
+  </script>
+<?php
+  
+    echo "This is the Planner! (ACTIVITIES)<br/>";  
+    print_footer($course);
+?>
