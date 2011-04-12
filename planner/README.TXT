@@ -1,8 +1,16 @@
-README.TXT for Moodle Planner module
+README.TXT for Moodle 1.9 Planner module
 
-Author: Onno Schuit (o.schuit@solin.nl)
+Author: Onno Schuit (o.schuit at or around solin.nl) - http://www.solin.eu
 
-The Planner module for Moodle allows students to assign a planned end date 
+*** CREDITS ***
+Concepts & Sponsoring: Spring - http://www.springinstituut.nl
+The original version of this module was commissioned by Stoas - http://www.stoas.nl
+
+
+
+*** What is the Planner Module? ***
+
+The Planner module for Moodle 1.9 allows students to assign a planned end date 
 to each activity.
 Teachers have the option to check the planning and export it to an Excel sheet.
 The Excel sheet shows the status of an activity, e.g. if a student hands in
