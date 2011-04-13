@@ -14,7 +14,6 @@
                              
     
     $id = required_param('id', PARAM_INT);                 // Course Module ID
-    //$coursesectionid = required_param('coursesectionid', PARAM_INT);                 
     $planner_dates = required_param('planner', PARAM_RAW);                 
     
     

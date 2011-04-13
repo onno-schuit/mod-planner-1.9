@@ -28,12 +28,6 @@
         error("Something went wrong in planner_create_sheet: could not create spreadsheet");
     }
     // This method call is writing the http headers, so do not move this function elsewhere
-    /*
-    $workbook->send('planning.xls');
-    $workbook->close();
-    */
-    
-    //$workbook =& planner_test(); 
     $workbook->send('planning.xls');
     $workbook->close();
     exit;  

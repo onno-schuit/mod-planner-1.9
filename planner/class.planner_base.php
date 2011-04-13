@@ -9,7 +9,6 @@
 
 
 require_once("helper_methods.php");
-//require_once("lib_export.php");
 
 
 $PLANNER_ERRORS = array();
@@ -24,7 +23,6 @@ class planner_base {
     var $group_id = false;
 
     function __construct($cm, $id, $context) {
-        //exit(print_r($cm));
         $this->cm = $cm;
         $this->id = $id;
         $this->context = $context;
@@ -180,7 +178,6 @@ class planner_base {
                                 WHERE summary <> '' 
                                 AND course = $courseid
                                 ORDER BY section");
-        //AND section > 0     
     } // function get_course_sections()
 
 
@@ -232,12 +229,10 @@ class planner_base {
                              $studentid);
         echo "  </table>";
         $this->print_form_footer($studentid);
-        //get_list_of_plugins('mod')
     } // function print_activities
 
 
     function print_section($section, $course_section_id, $studentid=false) {
-        //exit(print_r($modinfo->cms));
         $this->all_activities($course_section_id, $studentid);
     } // function print_section
 
@@ -347,7 +342,6 @@ class planner_base {
         $obj->planner_id = $planner->id;
         $obj->course_section_id = $date['course_section_id'];
         $obj->end_date = $this->normalize_date($date['end_date']);
-        //exit("\$obj->end_date = ".$obj->end_date);
         $obj->course_module_id = $course_module_id;    
 
         if ($date['date_id'] == '') {
@@ -382,12 +376,9 @@ class planner_base {
 
     function normalize_date($input_date) {
         $aResult = strptime($input_date, get_string('date_normalize', 'planner'));
-        //exit(print_r($aResult));
         
         // setting hour, minute, second to something other than 0 results in conversion troubles on some systems
         return mktime(0, 0, 0, $aResult['tm_mon'] + 1, $aResult['tm_mday'], $aResult['tm_year'] + 1900);    
-        
-        //return strtotime($input_date);
     } // function normalize_date
 
 
@@ -470,11 +461,6 @@ class planner_base {
             error(get_string("unlock_not_allowed", "planner"));  
         }   
         
-        /*
-        if (! ($this->current_user_in_same_group_as($owner_id)) ) {
-            error(get_string("unlock_not_allowed", "planner"));
-        } 
-        */ 
         if (set_field_select('planner_dates', 'grace_start', Time(), "planner_id = {$planner->id} AND user_id = $owner_id")) {
             $this->mail_unlocked_notification($owner_id);      
         }
@@ -522,7 +508,6 @@ class planner_base {
         echo "<table class='planner_student_list'>";            
         echo "  <tr><th>" . $this->get_role_name('student') . "</th><th>" . get_string('excelsheet','planner') . "</th></tr>";
         foreach ($students as $student) {
-            // get_string('export_to_excel_text', 'planner', $student)
             echo "<tr>
                     <td>
                       <a href='$CFG->wwwroot/mod/planner/teacher_view.php?id=$id&studentid=$student->id'>$student->firstname $student->lastname</a>
@@ -666,7 +651,6 @@ class planner_base {
     function get_grade($userid, $modname, $course_module_instance_id) {
         // course_modules.instance == grade_items.iteminstance
         global $CFG, $course;
-//      (100/rawgrademax) * COALESCE(rawgrade, 0)
         $grades = get_records_sql("SELECT DISTINCT grades.*, ((100/grades.rawgrademax) * grades.rawgrade) AS normalized_grade
                                    FROM {$CFG->prefix}grade_grades grades
                                    INNER JOIN {$CFG->prefix}grade_items i ON grades.itemid = i.id

@@ -52,12 +52,8 @@
         $obj = new Object;
         $obj->link = "{$CFG->wwwroot}/mod/planner/request_unlock.php?id=$id";
         echo "<div class='planner_request_unlock'>" . get_string('request_unlock_link', 'planner', $obj). "</div>";
-        //$planner->print_all_activities($USER->id);
         $planner_base->print_all($USER);
-
     }
-    
-  
   
     
     print_footer($course);

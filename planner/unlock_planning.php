@@ -37,7 +37,6 @@
   </script>
 
 <?php
-    //echo "UNLOCK ACTION";
     $planner_base = new planner_base($cm, $id, $context);
     if (! $planner_base->unlock($planner, $owner_id) ) { 
         error(get_string('unlock_error', 'planner'), "$CFG->wwwroot/mod/planner/form_unlock.php?id=$id&owner_id=$owner_id");         

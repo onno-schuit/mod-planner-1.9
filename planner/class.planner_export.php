@@ -5,17 +5,7 @@
 // into:
 // $grade->timecreated = ($datesubmitted) ? $datesubmitted : Time();
 
-/*
-Custom Fields:
 
-companyname
-companylocation
-companyaddress
-companyzipcode
-companycity
-companyphone
-subscriptiondate
-*/
 // DOCUMENTATION: http://pear.php.net/manual/en/package.fileformats.spreadsheet-excel-writer.intro-format.php
 
     ini_set('include_path', $CFG->libdir.'/pear' . PATH_SEPARATOR . ini_get('include_path'));
@@ -129,7 +119,6 @@ subscriptiondate
                 error(get_string('no_titled_sections','planner'));
                 return false;
             }
-            //exit(print_r($course_sections));
             foreach($course_sections as $course_section) {
                 $worksheet->rowOffSet += 2;
                 $worksheet->write_string($worksheet->rowOffSet, 0, $course_section->summary, $worksheet->format_bold );
@@ -158,7 +147,6 @@ subscriptiondate
             $userid =  $student->id;
             $dates = $this->get_dates($userid, $course_section->id);
             $sectionmods = explode(",", $section->sequence);
-            //$worksheet->setFormat('<l><vo>');
             foreach ($sectionmods as $modnumber) {
                 // Please note: $modnumber = course_modules.id
                 if (( in_array($modinfo->cms[$modnumber]->modname, $EXCLUDED_MODS) ) || ($modinfo->cms[$modnumber]->modname == '') ) {
@@ -185,59 +173,8 @@ subscriptiondate
                 
                 $worksheet->rowOffSet++;
                 
-                // <td>\$modnumber  = $modnumber -- \$instancename = $instancename -- \$modinfo->cms[$modnumber]->modname = {$modinfo->cms[$modnumber]->modname}<br/></td>
-                //<td>" . $this->date_field($dates, $modnumber, $course_section_id) . "</td>
             }
         } // function export_section
-        
-        
-        // HACK ahead: uses client's custom grade scale
-        /*
-        function get_mark($grade) {
-            global $SPRING_GRADE_SCALE;
-            if ((!$grade) || ($grade->rawgrade == 0)) {
-                return "";   
-            }
-            $rounded = round($grade->rawgrade) . "/" . round($grade->rawgrademax);
-            return (array_key_exists($rounded, $SPRING_GRADE_SCALE)) ? $SPRING_GRADE_SCALE[$rounded] : $rounded;
-        } // function get_mark
-        */
-        
-
-
-        // Please note that we are using the end date of the planning, instead of 
-        // the due date of e.g. assignment activitiy. This is because there is no single table
-        // to retrieve the actual due date from.
-        /*
-        function get_status($planned_date, $grade) {
-            if ( !$grade ) {
-                // student has not yet handed in or completed activity
-                return (Time() < $planned_date) ? 'yellow' : 'red';
-            }
-            
-            if ($grade->timecreated <= $planned_date) {
-                // in time  
-                if (!$grade->rawgrade) {
-                    // no grade
-                    return 'orange';
-                } else {
-                    // in time and graded
-                    return 'green'; 
-                }
-            } else {
-                // too late     
-                if (!$grade->rawgrade) {
-                    // no grade
-                    return 'purple';
-                } else {
-                    // graded
-                    return 'blue';
-                } 
-            }
-                             
-            return 'green';
-        } // function get_status
-         */
         
         
         function get_student($studentid) {
@@ -250,58 +187,6 @@ subscriptiondate
         } // function get_student
         
         
-        /*
-        function get_grade($userid, $modname, $course_module_instance_id) {
-            // course_modules.instance == grade_items.iteminstance
-            global $CFG, $course;
-          
-            $grades = get_records_sql("SELECT DISTINCT grades.* 
-                                       FROM {$CFG->prefix}grade_grades grades
-                                       INNER JOIN {$CFG->prefix}grade_items i ON grades.itemid = i.id
-                                       WHERE i.iteminstance = $course_module_instance_id
-                                       AND i.courseid = $course->id
-                                       AND i.itemmodule LIKE '{$modname}' 
-                                       AND grades.userid = $userid");
-            return ($grades) ? $grades[key($grades)] : false;
-            
-        } // function get_grade
-        */
-        
-        
-        function test() {
-            $workbook = new Spreadsheet_Excel_Writer();
-            $worksheet =& $workbook->addWorksheet('Planning');
-            $worksheet->format_bold =& $workbook->addFormat();
-            $worksheet->format_bold->setBold();
-            
-            $format_title =& $workbook->addFormat();
-            $format_title->setBold();
-            $format_title->setColor('white');
-            $format_title->setPattern(1);
-            $format_title->setFgColor('blue');
-            // let's merge
-            //$format_title->setAlign('merge');
-            
-            $worksheet =& $workbook->addWorksheet('Planning');
-            $worksheet->write(0, 0, "Quarterly Profits for Dotcom.Com", $format_title);
-            // Couple of empty cells to make it look better
-            $worksheet->write(0, 1, "", $format_title);
-            $worksheet->write(0, 2, "", $format_title);
-            $worksheet->write(1, 0, "Quarter", $worksheet->format_bold);
-            $worksheet->write(1, 1, "Profit", $worksheet->format_bold);
-            $worksheet->write(2, 0, "Q1");
-            $worksheet->write(2, 1, 0);
-            $worksheet->write(3, 0, "Q2");
-            $worksheet->write(3, 1, 0);   
-            
-            $worksheet->write(4, 0, "TEST", $worksheet->format_bold);
-            $worksheet->write(5, 0, "And NOT bold");
-            
-              
-            return $workbook;
-        }
-        
-
     } // class planner_export extends planner_base     
     
     

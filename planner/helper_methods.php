@@ -20,14 +20,7 @@ require("$CFG->dirroot/lib/fpdf/fpdf.php");
  **/
 function planner_add_instance($planner) {
     
-    // temp added for debugging
-    //echo "ADD INSTANCE CALLED";
-    //exit(print_object($planner));
-    
     $planner->timemodified = time();
-
-    # May have to add extra stuff in here #
-    
     return insert_record("planner", $planner);
 }
 
@@ -43,8 +36,6 @@ function planner_update_instance($planner) {
 
     $planner->timemodified = time();
     $planner->id = $planner->instance;
-
-    # May have to add extra stuff in here #
 
     return update_record("planner", $planner);
 }
@@ -173,15 +164,7 @@ function planner_get_participants($plannerid) {
  * @todo Finish documenting this function
  **/
 function planner_scale_used ($plannerid,$scaleid) {
-    $return = false;
-
-    //$rec = get_record("planner","id","$plannerid","scale","-$scaleid");
-    //
-    //if (!empty($rec)  && !empty($scaleid)) {
-    //    $return = true;
-    //}
-   
-    return $return;
+    return false;
 }
 
 function planner_get_navigation() {

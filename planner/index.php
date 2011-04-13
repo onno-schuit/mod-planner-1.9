@@ -78,7 +78,6 @@
     }
 
     echo "<br />";
-    //echo "And here's the table:<br/>";
     print_table($table);
 
 /// Finish the page

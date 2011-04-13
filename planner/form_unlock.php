@@ -8,7 +8,6 @@
 
     require_once("../../config.php");
     require_once("lib.php");
-    //require_once("class.planner_base.php");
     
     $id = required_param('id', PARAM_INT);                 // Course Module ID
     $owner_id = required_param('owner_id', PARAM_INT);     // userid of student who made the planning

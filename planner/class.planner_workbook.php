@@ -20,7 +20,6 @@ class PlannerWorkbook extends Spreadsheet_Excel_Writer {
 
         if(!isset($CFG->latinexcelexport) || !$CFG->latinexcelexport) {
             $worksheet->setInputEncoding('UTF-16LE');
-            // $worksheet->setInputEncoding('utf-8');
         }
         return $worksheet;
     }
